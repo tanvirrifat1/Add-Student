@@ -16,7 +16,7 @@ import { EffectFade, Navigation, Pagination } from "swiper";
 
 const Slider = () => {
     return (
-        <div>
+        <div className='bg-base-200'>
             <Swiper
                 spaceBetween={30}
                 effect={"fade"}

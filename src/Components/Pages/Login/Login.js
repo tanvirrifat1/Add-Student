@@ -23,7 +23,7 @@ const Login = () => {
                 console.log(user)
                 navigate(from, { replace: true })
                 toast.success('Login successful', { autoClose: 500 })
-
+                navigate('/message')
             })
             .catch(err => {
                 console.log(err)
@@ -37,6 +37,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
+                navigate('/message')
             })
             .catch(err => console.error(err))
     }

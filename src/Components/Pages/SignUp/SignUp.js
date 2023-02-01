@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Contexts/AuthProvider';
 
@@ -9,6 +9,7 @@ const SignUp = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm()
     const { createUser, verify, GoogleLogin } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const handleSignUp = (data) => {
         console.log(data)
@@ -18,6 +19,7 @@ const SignUp = () => {
                 console.log(user)
                 toast.success('User create Successfully And Verify Your Email', { autoClose: 500 })
                 verify()
+                navigate('/message')
             })
             .catch(err => console.log(err))
 
@@ -29,6 +31,7 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
+                navigate('/message')
             })
             .catch(err => console.error(err))
     }
