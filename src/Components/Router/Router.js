@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layout/Main";
 import Contact from "../Pages/Contact/Contact";
+import ContactEdit from "../Pages/Contact/ContactEdit";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Inbox from "../Pages/Message/Inbox/Inbox";
@@ -24,6 +25,11 @@ export const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login></Login>
+            },
+            {
+                path: '/edit/:id',
+                element: <ContactEdit />,
+                loader: ({ params }) => fetch(`http://localhost:5000/allStudents/${params.id}`)
             },
 
 

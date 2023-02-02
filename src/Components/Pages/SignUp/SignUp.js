@@ -17,7 +17,7 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user
                 console.log(user)
-                toast.success('User create Successfully And Verify Your Email', { autoClose: 500 })
+                toast.success('User create Successfully And Verify Your Email', { autoClose: 1500 })
                 verify()
                 navigate('/message')
             })
