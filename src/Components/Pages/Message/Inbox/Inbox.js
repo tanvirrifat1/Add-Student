@@ -7,8 +7,6 @@ import { toast } from 'react-toastify';
 const Inbox = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const time = new Date().toLocaleString();
-    // const SelectClass = ["class6", "class7", "class8", "class9", "class10"]
-    // const Division = ["a", "b", "c", "d", "e"]
 
 
     const handleSubmitData = (data) => {
@@ -39,8 +37,7 @@ const Inbox = () => {
         }
         reset()
 
-
-        fetch(`http://localhost:5000/students`, {
+        fetch(`https://add-student-server.vercel.app/students`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -49,6 +46,7 @@ const Inbox = () => {
         })
             .then(res => res.json())
             .then(data => {
+
                 if (data.acknowledged) {
                     toast.success('confirmed', { autoClose: 500 })
                 }

@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
             {
                 path: '/edit/:id',
                 element: <ContactEdit />,
-                loader: ({ params }) => fetch(`http://localhost:5000/allStudents/${params.id}`)
+                loader: ({ params }) => fetch(`https://add-student-server.vercel.app/allStudents/${params.id}`)
             },
 
 

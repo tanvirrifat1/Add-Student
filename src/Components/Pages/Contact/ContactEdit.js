@@ -38,7 +38,7 @@ const ContactEdit = () => {
             Division
         }
 
-        fetch(`http://localhost:5000/allStudents`, {
+        fetch(`https://add-student-server.vercel.app/allStudents`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -166,7 +166,7 @@ const ContactEdit = () => {
                         </div>
                     </fieldset>
                     <div className='ml-6'>
-                        <button type='submit' className='btn bg-red-500 w-80'>Add Student</button>
+                        <button type='submit' className='btn bg-red-500 w-80'>Manage Student</button>
                     </div>
                 </form>
             </section>

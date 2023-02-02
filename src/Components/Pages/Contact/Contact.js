@@ -1,41 +1,45 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { useContext } from 'react';
 import { useState } from 'react';
 import { AiFillDelete, AiFillEye } from 'react-icons/ai';
 import { FaPen } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import ContactModal from './ContactEdit';
+
 
 const Contact = () => {
     const [modalData, setModalData] = useState({})
-    const time = new Date().toLocaleString();
 
-    console.log(modalData)
+
+    const time = new Date().toLocaleString();
 
     const { data: allStudents = [], refetch } = useQuery({
         queryKey: ['allStudents'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/allStudents')
+            const res = await fetch('https://add-student-server.vercel.app/allStudents')
             const data = await res.json()
             return data
         }
     })
 
-    console.log(allStudents)
 
     const handleDelete = id => {
-        fetch(`http://localhost:5000/delete/${id}`, {
-            method: 'DELETE',
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.acknowledged) {
-                    toast.error('Delete', { autoClose: 1000 })
-                    refetch()
-                }
+        const confirmed = window.confirm('are you sure to delete')
+
+        if (confirmed) {
+            fetch(`https://add-student-server.vercel.app/delete/${id}`, {
+                method: 'DELETE',
             })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.acknowledged) {
+
+                        toast.error('Delete confirmed', { autoClose: 1000 })
+                        refetch()
+                    }
+                })
+        }
+
     }
 
     return (
@@ -49,12 +53,12 @@ const Contact = () => {
             <div className="overflow-x-auto ">
                 <table className="table w-full ">
 
-                    <thead className='bg-red-500'>
+                    <thead className=' hover:bg-red-500'>
                         <tr >
-                            <th>Name</th>
-                            <th>Class</th>
-                            <th>Roll No.</th>
-                            <th>View/Edit/Delete</th>
+                            <th className='hover:bg-red-500 text-[15px] hover:text-white '>Name</th>
+                            <th className='hover:bg-red-500 text-[15px] hover:text-white '>Class</th>
+                            <th className='hover:bg-red-500 text-[15px] hover:text-white '>Roll No.</th>
+                            <th className='hover:bg-red-500 text-[15px] hover:text-white '>View/Edit/Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,7 +71,7 @@ const Contact = () => {
                                     <div className='flex py-2'>
                                         <label onClick={() => setModalData(students)} className='flex text-2xl ml-4' htmlFor="openModal" ><AiFillEye /></label>
                                         <Link to={`/edit/${students._id}`} className='flex text-2xl ml-4'  > <FaPen /></Link>
-                                        <label onClick={() => handleDelete(students._id)} className='flex text-2xl '>  <AiFillDelete className='ml-5' /></label>
+                                        <label htmlFor="deleteModal" onClick={() => handleDelete(students._id)} className='flex text-2xl '>  <AiFillDelete className='ml-5' /></label>
                                     </div>
                                 </tr>
                             )
@@ -90,6 +94,7 @@ const Contact = () => {
                                 </div>
                             </div>
                         </div>
+
                     </tbody>
                 </table>
             </div>
