@@ -1,16 +1,60 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const ContactEdit = () => {
 
     const allInformation = useLoaderData()
-    console.log(allInformation)
+
+    const navigate = useNavigate()
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
-    const handleEdit = () => {
+    const handleEdit = (data) => {
+        const firstName = data.firstName;
+        const middleName = data.middleName;
+        const lastName = data.lastName;
+        const SelectClass = data.SelectClass;
+        const Division = data.Division;
+        const number = data.number;
+        const addressLine1 = data.addressLine1;
+        const addressLine2 = data.addressLine2;
+        const LandMark = data.LandMark;
+        const city = data.city;
+        const pin = data.pin;
 
+        const allStudent = {
+            firstName,
+            middleName,
+            lastName,
+            number,
+            addressLine1,
+            addressLine2,
+            LandMark,
+            city,
+            pin,
+            SelectClass,
+            Division
+        }
+
+        fetch(`http://localhost:5000/allStudents`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(allStudent)
+        })
+            .then(res => res.json())
+            .then(data => {
+                navigate('/message/contact')
+                if (data.modifiedCount > 0) {
+                    toast.success('Edit Confirmed', { autoClose: 500 })
+                }
+                else {
+                    toast.info('No Change ', { autoClose: 500 })
+                }
+            })
     }
 
     return (
@@ -61,7 +105,7 @@ const ContactEdit = () => {
                             </div>
                             <div className="col-span-full sm:col-span-2">
                                 <label for="Division" className="text-sm text-black">Select Division</label>
-                                <select defaultValue={''}
+                                <select defaultValue={allInformation.Division}
                                     className='input bg-white text-black input-ghost w-full  input-bordered input-primary ' {...register("Division", {
                                         required: "Brand is required"
                                     })}>

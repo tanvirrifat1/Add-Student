@@ -10,7 +10,7 @@ import ContactModal from './ContactEdit';
 
 const Contact = () => {
     const [modalData, setModalData] = useState({})
-
+    const time = new Date().toLocaleString();
 
     console.log(modalData)
 
@@ -41,8 +41,9 @@ const Contact = () => {
     return (
         <div className='border border-red-200 bg-base-100'>
             <div>
-                <div className=''>
+                <div className='flex justify-between'>
                     <h1 className='text-xl font-semibold m-4'>Manage Student</h1>
+                    <p className='text-xl m-2 font-semibold'>{time}</p>
                 </div>
             </div>
             <div className="overflow-x-auto ">
@@ -77,13 +78,15 @@ const Contact = () => {
                             <div className="modal">
                                 <div className="modal-box relative">
                                     <label htmlFor="openModal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                                    <h3 className="text-lg font-bold">{ }</h3>
-                                    <p className="py-4 font-semibold">Name {modalData.firstName} {modalData.middleName} {modalData.lastName}</p>
+                                    {/* <h3 className="text-lg font-bold">{ }</h3> */}
+                                    <p className="py-4 text-2xl font-semibold">Name {modalData.firstName} {modalData.middleName} {modalData.lastName}</p>
                                     <p className=" font-semibold">Class {modalData.SelectClass} </p>
                                     <p className=" font-semibold">Roll No. {modalData.number} </p>
                                     <p className=" font-semibold">addressLine1. {modalData.addressLine1} </p>
                                     <p className=" font-semibold">addressLine2. {modalData.addressLine2} </p>
                                     <p className=" font-semibold">city. {modalData.city} </p>
+                                    <p className=" font-semibold">Division. {modalData.Division} </p>
+                                    <p className=" font-semibold">LandMark. {modalData.LandMark} </p>
                                 </div>
                             </div>
                         </div>

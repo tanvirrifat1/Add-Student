@@ -48,8 +48,8 @@ const Message = () => {
                     <label htmlFor="message-drawer" className="drawer-overlay"></label>
                     <ul className="menu w-80  text-base-content ">
 
-                        <li className='text-black font-bold '><Link to='/message'><AiOutlineUsergroupAdd className='text-xl' /> Add Student</Link></li>
-                        <li className='font-bold '><Link to='/message/contact'><MdManageSearch className='text-xl' /> Manage Student</Link></li>
+                        <li className='text-black hover:bg-red-500 hover:text-white font-bold '><Link to='/message'><AiOutlineUsergroupAdd className='text-xl' /> Add Student</Link></li>
+                        <li className='font-bold hover:bg-red-500 hover:text-white '><Link to='/message/contact'><MdManageSearch className='text-xl' /> Manage Student</Link></li>
                         <span className='text-black mt-2 font-bold flex '><GoSignOut className='ml-5' /> <button className='ml-3' onClick={handleLogOut}>Sign Out</button></span>
 
                     </ul>
